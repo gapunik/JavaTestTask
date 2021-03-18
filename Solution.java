@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class Solution {
 
     public static void main(String[] args) {
-//       "2[3[x]y]";
         while (true) {
             System.out.println("Введите строку, которую требуется распаковать. Для завершения программы введите exit.");
             Scanner console = new Scanner(System.in);
@@ -15,7 +14,6 @@ public class Solution {
             System.out.println("Распакованная строка: " + unpackedString);
             System.out.println();
         }
-
     }
 
     public static String unpackString(String string) {
@@ -33,12 +31,10 @@ public class Solution {
                 StringBuilder timesStrBuilder = new StringBuilder();
                 timesStrBuilder.append(ch);
 
-                for (int j = i + 1; j < chars.length && Character.isDigit(chars[j]); j++) {
+                for (int j = i + 1; j < chars.length && Character.isDigit(chars[j]); j++, i++) {
                     timesStrBuilder.append(chars[j]);
-                    i++;
                 }
 
-                int timesToRepeat = Integer.parseInt(timesStrBuilder, 0, timesStrBuilder.length(), 10);
                 int bracketCounter = 0;
 
                 StringBuilder currentStrBuilder = new StringBuilder();
@@ -59,6 +55,7 @@ public class Solution {
 
                 }
 
+                int timesToRepeat = Integer.parseInt(timesStrBuilder, 0, timesStrBuilder.length(), 10);
                 for (int j = 0; j < timesToRepeat; j++) {
                     resultStrBuilder.append( unpackString(currentStrBuilder.toString()) );
                 }
@@ -67,9 +64,8 @@ public class Solution {
 
                 StringBuilder currentStrBuilder = new StringBuilder();
                 currentStrBuilder.append(ch);
-                for (int j = i + 1; j < chars.length && !Character.isDigit(chars[j]); j++) {
+                for (int j = i + 1; j < chars.length && !Character.isDigit(chars[j]); j++, i++) {
                     currentStrBuilder.append(chars[j]);
-                    i++;
                 }
 
                 resultStrBuilder.append(currentStrBuilder);
